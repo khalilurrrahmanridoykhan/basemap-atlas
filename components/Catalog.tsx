@@ -2,10 +2,10 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowUpRight, Search, SlidersHorizontal, Star } from "lucide-react";
-import { basemaps, categories } from "@/lib/data";
+import { Basemap, categories } from "@/lib/data";
 import { MapArt } from "./MapArt";
 
-export function Catalog() {
+export function Catalog({ basemaps }: { basemaps: Basemap[] }) {
   const [query,setQuery]=useState(""); const [category,setCategory]=useState("All maps"); const [price,setPrice]=useState("All");
   const maps=useMemo(()=>basemaps.filter(m=>(category==="All maps"||m.category===category)&&(price==="All"||m.pricing===price)&&(`${m.name} ${m.provider} ${m.category} ${m.gis.join(" ")}`.toLowerCase().includes(query.toLowerCase()))),[query,category,price]);
   return <section className="catalog" id="explore">
